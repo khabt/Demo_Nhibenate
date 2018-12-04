@@ -10,6 +10,13 @@
     <property name ="LastName" column ="LastName" type= "string"></property>
     <property name ="FirstName" column ="FirstMidName" type ="string"></property>    
     <property name="AcademicStanding"></property>
+
+    <component name="Address">
+      <property name="Street"></property>
+      <property name="City"></property>
+      <property name="Province"></property>
+      <property name="Country"></property>
+    </component>
   </class>
 
 </hibernate-mapping>

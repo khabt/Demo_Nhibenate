@@ -39,5 +39,25 @@ namespace NhibernateDemo.Data
                 };
             }
         }
+
+        public static Student AddItem(StudentAcademicStanding optional)
+        {
+            var student = new Student
+            {
+                FirstName = RandomString(4),
+                LastName = RandomString(5),
+                AcademicStanding = optional,
+
+                Address = new Location
+                {
+                    Street = "123 Street",
+                    City = "Lahore",
+                    Province = "Punjab",
+                    Country = "Pakistan"
+                }
+            };
+
+            return student;
+        }
     }
 }

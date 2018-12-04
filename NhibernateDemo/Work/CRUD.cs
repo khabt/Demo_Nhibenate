@@ -36,17 +36,23 @@ namespace NhibernateDemo.Work
                     if (stdntOne != null)
                     {
                         Console.WriteLine("Retrieved  by ID");
-                        Console.WriteLine("{0} \t{1} \t{2}", stdntOne.ID, stdntOne.FirstName, stdntOne.LastName);
+                        Console.WriteLine("{0} \t{1} \t{2} \t{3} \t{4} \t{5} \t{6} \t{7}", 
+                            stdntOne.ID, stdntOne.FirstName, stdntOne.LastName,
+                            stdntOne.Address.Street, stdntOne.Address.City, stdntOne.Address.Province, stdntOne.Address.Country
+                            );
                     }
                     if (stdntTwo != null)
                     {
                         Console.WriteLine("Retrieved  by ID");
-                        Console.WriteLine("{0} \t{1} \t{2}", stdntTwo.ID, stdntTwo.FirstName, stdntTwo.LastName);
+                        Console.WriteLine("{0} \t{1} \t{2} \t{3} \t{4} \t{5} \t{6} \t{7}", 
+                            stdntTwo.ID, stdntTwo.FirstName, stdntTwo.LastName,
+                            stdntTwo.Address.Street, stdntTwo.Address.City, stdntTwo.Address.Province, stdntTwo.Address.Country
+                            );
                     }
                     tx.Commit();
                 }                
             }
-        }
+        }        
 
         public static void ReadList()
         {
