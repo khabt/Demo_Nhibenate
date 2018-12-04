@@ -4,14 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NhibernateDemo.Work;
+using NhibernateDemo.Domain;
+
 namespace NhibernateDemo.Do
 {
-    public static class Do
+    public static class Action
     {
-
-        public static void Create<Student>(Student entity)
+        //Class Action - no used
+        public static void Add<Student>(Student entity)
         {
-            CRUD.CreateTable<Student>(entity);
+            CRUD.AddItem(entity);            
         }    
     }
 }
