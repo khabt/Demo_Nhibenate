@@ -96,6 +96,8 @@
     <Compile Include="Data\ItemData.cs" />
     <Compile Include="Domain\Customer.cs" />
     <Compile Include="Domain\Order .cs" />
+    <Compile Include="Model\CustomerCreditRating.cs" />
+    <Compile Include="Model\Location.cs" />
     <Compile Include="Work\CRUD.cs" />
     <Compile Include="Database\ConnectDataBase.cs" />
     <Compile Include="Domain\Student.cs" />
@@ -112,15 +114,15 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Model\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Config\hibernate.cfg.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Domain\Customer.hbm.xml" />
-    <Content Include="Domain\Order.hbm.xml" />
+    <EmbeddedResource Include="Domain\Customer.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Domain\Order.hbm.xml" />
     <Content Include="Sql\script.sql" />
   </ItemGroup>
   <ItemGroup>

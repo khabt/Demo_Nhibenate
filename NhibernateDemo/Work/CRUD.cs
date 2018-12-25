@@ -1,8 +1,10 @@
 ﻿using NHibernate;
+using NhibernateDemo.Data;
 using NhibernateDemo.Database;
 using NhibernateDemo.Domain;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,7 +22,7 @@ namespace NhibernateDemo.Work
                 using(var tx = session.BeginTransaction())
                 {
                     session.Save(entity);
-                    tx.Commit();
+                    tx.Commit();                    
                 }
             }
         }
@@ -136,6 +138,64 @@ namespace NhibernateDemo.Work
                     tx.Commit();
                 }
             }
+            
         }
+
+        public static Guid AddItem(Customer entity)
+        {
+            Guid id = new Guid();
+            Console.WriteLine(entity);
+            using (var session = db.Sefact.OpenSession())
+            {
+                using (var tx = session.BeginTransaction())
+                {
+                    session.Save(entity);
+                    foreach (var order in entity.Orders)
+                    {
+                        session.Save(order);
+                    }
+                    tx.Commit();
+                    id = entity.Id;
+                }
+            }
+            return id;
+        }
+
+        public static void ReadCustomer(Guid id)
+        {
+            using (var session = db.Sefact.OpenSession())
+            {
+                using (var tx = session.BeginTransaction())
+                {
+                    var Customer = session.Load<Customer>(id);
+                    Console.WriteLine("Loading...");
+                    Console.WriteLine("...................................");
+                    Console.WriteLine(Customer);
+                    tx.Commit();
+
+                    WriteFile(Customer);
+                }
+            }
+
+            Console.ReadLine();
+        }
+
+        public static void WriteFile(Customer entity)
+        {
+            string fileName = @"Custormer.txt";
+
+            if (!File.Exists(fileName))
+            {
+                var file = File.Create(fileName);
+                file.Close();
+            }
+
+
+            using (StreamWriter sw = new StreamWriter(fileName, true))
+            {
+                sw.WriteLine(entity.ToString());
+                Console.WriteLine("Write Success!");
+            }
+        }      
     }
 }

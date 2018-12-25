@@ -3,6 +3,7 @@ using NHibernate.Cache;
 using NHibernate.Cfg;
 using NHibernate.Dialect;
 using NHibernate.Driver;
+using System.Data;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -24,8 +25,11 @@ namespace NhibernateDemo.Database
                 x.Dialect<MsSql2008Dialect>();
                 x.LogSqlInConsole = true;
                 x.BatchSize = 10;
+                x.Timeout = 10;                
+                x.IsolationLevel = IsolationLevel.RepeatableRead;
             });
-            Configuration.Cache(c => {
+            Configuration.Cache(c =>
+            {
                 c.UseMinimalPuts = true;
                 c.UseQueryCache = true;
             });
@@ -40,6 +44,7 @@ namespace NhibernateDemo.Database
             string FileConfig = System.Configuration.ConfigurationManager.ConnectionStrings["PathFileConfigHibernate"].ToString();
             Configuration = new Configuration();
             Configuration.Configure(FileConfig);
+            Configuration.SessionFactory().GenerateStatistics();
             Sefact = Configuration.BuildSessionFactory();
         }
     }

@@ -1,4 +1,5 @@
 ﻿using NhibernateDemo.Domain;
+using NhibernateDemo.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -58,6 +59,47 @@ namespace NhibernateDemo.Data
             };
 
             return student;
+        }
+
+        public static Customer CreateCustomer()
+        {
+            var customer = new Customer
+            {
+                FirstName = ItemData.RandomString(4),
+                LastName = ItemData.RandomString(8),
+                Points = 100,
+                HasGoldStatus = true,
+                MemberSince = new DateTime(2012, 1, 1),
+                CreditRating = CustomerCreditRating.Good,
+                AverageRating = 42.242424,
+                Address = CreateLocation()
+            };
+            var orderOne = new Order
+            {
+                Ordered = DateTime.Now
+            };
+
+            customer.AddOrder(orderOne);
+
+            var orderTwo = new Order
+            {
+                Ordered = DateTime.Now.AddDays(-1),
+                Shipped = DateTime.Now,
+                ShipTo = CreateLocation()
+            };
+            customer.AddOrder(orderTwo);
+            return customer;
+        }
+
+        private static Location CreateLocation()
+        {
+            return new Location
+            {
+                Street = "615 Le Trong Tan",
+                City = "TP. HCM",
+                Province = "Center",
+                Country = "VN"
+            };
         }
     }
 }
